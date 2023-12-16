@@ -1,0 +1,44 @@
+@use "./../../../../assets/styles/variables.scss";
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: variables.$color-principal-100;
+  width: 100%;
+  height: 80px;
+  img {
+    width: 150px;
+    margin-left: 30px;
+  }
+  nav {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+    > * {
+      font-size: large;
+      color: #fff;
+      line-height: 20px;
+      background-color: unset;
+      border: unset;
+      text-decoration: unset;
+      padding: 16px 12px;
+      cursor: pointer;
+      &:hover {
+        background-color: variables.$color-principal-200;
+      }
+    }
+  }
+}
+
+.active {
+  font-weight: bold;
+}
+
+@media (width < 720px){
+  header #logo{
+    height: 40px;
+  }
+}

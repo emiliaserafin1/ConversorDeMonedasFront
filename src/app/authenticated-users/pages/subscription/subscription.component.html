@@ -1,0 +1,19 @@
+<div class="page-container">
+    <div class="card" *ngFor="let subscription of subscriptions">
+        <div class="card-header" >
+            <h3 class="card-title">{{subscription.name}}</h3>
+            <p class="description">{{ subscription.id === 1 ? 'Ideal para uso casual.' : 'Ideal para uso profesional.' }}</p>
+            <p class="card-price">ARS <span>{{subscription.price}}</span>/mes</p>
+        </div>        
+        <div class="card-body">
+            <button class="card-button" (click)="editUserSubscription(subscription.id)">Elegir</button>
+            <p>Funciones Principales</p>
+            <ul class="card-features">
+            <li>{{subscription.id !== 9 ? "✓ Hasta "+ subscription.amountOfConversions+" conversiones por mes" : "✓ Conversiones ilimitadas"}}</li>
+            <li>✓ Conversiones ilimitadas</li>
+            <li>✓ Historial de conversiones</li>
+        </ul>
+        </div>
+    </div>
+</div>
+

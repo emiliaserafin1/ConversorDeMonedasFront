@@ -1,0 +1,186 @@
+@use "./variables.scss";
+
+.background {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-container {
+    height: 97vh;
+    width: 98vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: variables.$color-principal-200;
+    border-radius: 15px;
+}
+
+.logo-container {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 8vh;
+}
+
+.logo-verde-sombra {
+    width: 170px;
+}
+
+.form-container {
+    background-color: #ffff;
+    height: 93vh;
+    width: 430px;
+    border-radius: 15px;
+    margin: auto 16px auto auto;
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    width: 300px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+form img {
+    width: 140px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+}
+
+form p:first-of-type {
+    margin-top: 35%;
+    margin-bottom: 20%;
+    font-weight: 500;
+    color: variables.$color-principal-200;
+    font-size: 28px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 50px;
+}
+
+form div input {
+    color: variables.$color-principal-200;
+    background: none;
+    border: none;
+    border-bottom: solid 2px  variables.$color-principal-200;
+    padding: 14px 14px 6px 0px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.input-style {
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+    font-size: 16px;
+}
+
+form div label {
+
+    position: absolute;
+    bottom: 8px;
+    left: 0px;
+    cursor: pointer;
+    color:  variables.$color-principal-200;
+    transition: transform .2s;
+}
+
+input:focus + label, 
+input:not(:placeholder-shown) + label {
+    transform: translateY(-24px);
+    font-size: 12px;
+    padding: 0;   
+} 
+
+i{
+    position: absolute;
+    top: 0;
+    margin: 18px 0 0 280px;
+    color:  variables.$color-principal-200;
+    cursor: pointer;
+}
+
+.error {
+    font-size: 10px;
+    color: variables.$color-principal-200;
+    text-align: left;
+}
+
+button {
+    width: 100%;
+    background-color: variables.$color-principal-200;
+    color: #ffff;
+    margin-top: 30px;
+    border: none;
+    border-radius: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-out;
+    font-size: 14px;
+}
+
+button:hover{
+    background-color: variables.$color-principal-100;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+form p:last-of-type {
+    font-weight: 400;
+    color: variables.$color-principal-200;
+    font-size: 14px;
+    margin-top: 10vw;
+}
+
+a{
+    color: variables.$color-principal-200;
+}
+
+@media (width < 980px) {
+    .page-container {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+    .form-container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        
+        
+    }
+    form {
+        margin: auto;
+    }
+    
+    .logo-container {
+        width: 0;
+        display: none;
+    }
+}

@@ -1,0 +1,15 @@
+@use "./../../../../assets/styles/variables.scss";
+
+footer {
+    height: 25px;
+    background-color: variables.$color-principal-100;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    color: #fff;
+    font-size: small;
+}

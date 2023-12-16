@@ -1,0 +1,19 @@
+@use "./../../../../assets/styles/form.scss";
+@use "./../../../../assets/styles/variables.scss";
+
+form div {
+    margin-top: 20px;
+}
+
+form p:first-of-type {
+    margin-top: 25%;
+    margin-bottom: 10%;
+    font-weight: 500;
+    color: variables.$color-principal-200;
+    font-size: 28px;
+}
+
+form p:last-of-type {
+    margin-top: 2vw;
+}
+

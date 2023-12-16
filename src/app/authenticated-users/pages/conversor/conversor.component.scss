@@ -1,0 +1,110 @@
+@use "./../../../../assets/styles/variables.scss";
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 105px);
+    gap: 40px;
+    background-color: #F8F9FA;
+}
+
+.card {
+    padding: 30px;
+    border-radius: 15px;
+    background-color: variables.$color-principal-200; 
+    color: variables.$color-principal-200;
+    transition: transform 0.5s ease-out;
+    width: 400px;
+}
+
+    .card h1{
+        font-size: 22px;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .card p{
+        color: #ffffff;
+        font-weight: 300;
+        font-size: 14px;
+    }
+
+.mt-20{
+    margin-top: 20px;
+}
+.mt-10{
+    margin-top: 10px;
+}
+.p-10{
+    padding: 10px;
+}
+.w-100{
+    width: 100%;
+}
+.d-flex{
+    display: flex;
+}
+.justify-content-between{
+    justify-content: space-between;
+}
+.align-items-center{
+    align-items: center;
+}
+
+select{
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+}
+    select.p-10 {
+        border: none; 
+        outline: none; 
+    }
+
+i{
+    color: #ffffff;
+    margin: auto;
+    padding: 0 30px;
+}
+
+input{
+    border: none;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    min-width: 97%;
+    max-width: 97%;
+    font-size: 16px;
+}
+
+button{
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background-color: #47605F;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.content-res{
+    width: 100%;
+    background: variables.$color-principal-100;
+    text-align: center;
+    padding: 30px 0;
+}
+
+    .content-res h3{
+        color: #ffffff;
+        font-weight: 400;
+        margin-bottom: 30px;
+    }
+    .content-res p{
+        color: #ffffff;
+        font-weight: 400;
+        font-size: 26px;
+        letter-spacing: 5px;
+    }

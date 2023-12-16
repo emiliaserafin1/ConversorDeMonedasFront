@@ -19,8 +19,8 @@ const routes: Routes = [
     loadChildren: ()=> import('./authenticated-users/pages/conversor/conversor.module').then(m => m.ConversorModule)
   },
   {
-    path:"**",
-    redirectTo: "login"
+    path:"perfil",
+    loadChildren: ()=> import('./authenticated-users/pages/user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule)
   }
 ];
 

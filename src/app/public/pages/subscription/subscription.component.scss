@@ -4,9 +4,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 105px);
+    min-height: calc(100vh - 105px);
     gap: 40px;
     background-color: #F8F9FA;
+    padding: 20px;
 }
 
 .card {
@@ -57,7 +58,6 @@ margin: 0;
 
 .card-features li {
 padding: 10px;
-border-bottom: 1px solid #F8F9FA;
 }
 
 .card-button {
@@ -84,5 +84,21 @@ background-color: variables.$color-principal-100;
 @media (width < 980px) {
     .page-container {
         flex-direction: column;
+        max-height: none;
+    }
+
+    .card {
+        transition: none;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+
+    .card:first-of-type {
+        margin-top: 50px;
+    }
+    .card:last-of-type {
+        margin-bottom: 50px;
     }
 }

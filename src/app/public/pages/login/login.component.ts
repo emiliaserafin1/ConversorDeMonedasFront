@@ -26,14 +26,21 @@ export class LoginComponent {
   }
 
   login(){
+    this.cargando.set(true); // Inicia el cargador
     this.errorLogin.set(false);
-    this.cargando.set(true);
     this.authService.login(this.loginData).then(res => {
-      if(res) this.router.navigate(["/"]);
+      if(res) {
+        setTimeout(() => {
+          this.cargando.set(false); // Detiene el cargador después de 2 segundos
+          this.router.navigate(["/conversor"]);
+        }, 1000);
+      }
       else {
-        this.errorLogin.set(true)
+        setTimeout(() => {
+          this.cargando.set(false);
+          this.errorLogin.set(true); // Detiene el cargador después de 1 segundo si hay un error
+        }, 1000);
       };
-      this.cargando.set(false);
     });
   }
 }

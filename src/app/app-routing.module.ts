@@ -12,7 +12,15 @@ const routes: Routes = [
   },
   {
     path:"subscription",
-    loadChildren: ()=> import('./authenticated-users/pages/subscription/subscription.module').then(m => m.SubscriptionModule)
+    loadChildren: ()=> import('./public/pages/subscription/subscription.module').then(m => m.SubscriptionModule)
+  },
+  {
+    path:"conversor",
+    loadChildren: ()=> import('./authenticated-users/pages/conversor/conversor.module').then(m => m.ConversorModule)
+  },
+  {
+    path:"**",
+    redirectTo: "login"
   }
 ];
 

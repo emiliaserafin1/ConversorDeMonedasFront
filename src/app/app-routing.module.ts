@@ -13,6 +13,14 @@ const routes: Routes = [
   {
     path:"subscription",
     loadChildren: ()=> import('./authenticated-users/pages/subscription/subscription.module').then(m => m.SubscriptionModule)
+  },
+  {
+    path:"conversor",
+    loadChildren: ()=> import('./authenticated-users/pages/conversor/conversor.module').then(m => m.ConversorModule)
+  },
+  {
+    path:"perfil",
+    loadChildren: ()=> import('./authenticated-users/pages/user-dashboard/user-dashboard.module').then(m => m.UserDashboardModule)
   }
 ];
 

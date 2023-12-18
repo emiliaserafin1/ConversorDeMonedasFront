@@ -138,25 +138,20 @@ button:hover{
 }
 
 .loader-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(132, 158, 158, 0.778);
 }
 
 .loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #FFF;
+    margin-top: 20px;
+    width: 30px;
+    height: 30px;
+    border: 4px solid variables.$color-principal-200;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
-    position: relative;
+    justify-content: center;
 }
 
 @keyframes rotation {

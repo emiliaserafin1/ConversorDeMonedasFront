@@ -18,6 +18,16 @@ export class UserService extends ApiService{
     return data;
   }
   
+  async getUserById(id: number): Promise<User> {
+    const res = await fetch(API + 'User/' + id, {
+      headers: {
+        Authorization: 'Bearer ' + this.auth.token(),
+      },
+    });
+    const data = await res.json();
+    return data;
+  }
+
   async editUserSubscription(userId: number, subscriptionId: number): Promise<boolean> {
     const res = await fetch(API + 'User/' + userId, {
       method: 'PATCH',

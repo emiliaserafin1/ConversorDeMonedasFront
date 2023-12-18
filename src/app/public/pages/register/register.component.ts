@@ -62,7 +62,7 @@ export class RegisterComponent {
         setTimeout(() => {
           this.cargando.set(false);
           this.errorRegister.set(true); // Detiene el cargador después de 1 segundo si hay un error
-        }, 1000);
+        }, 2000);
       }
     } catch(err) {
       console.warn('Error registrando', err)

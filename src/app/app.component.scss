@@ -3,8 +3,10 @@ div{
     flex-direction: column;
 }
 
-app-footer{
-    position: sticky;
+app-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 app-header{

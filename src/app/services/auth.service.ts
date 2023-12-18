@@ -10,6 +10,7 @@ import { API } from '../constants/api';
   providedIn: 'root'
 })
 export class AuthService {
+  authenticating = signal(false);
   constructor() {
     this.token.set(localStorage.getItem('token'));
   }
@@ -30,8 +31,10 @@ export class AuthService {
       console.log('LOGUEANDO', tokenRecibido);
       localStorage.setItem('token', tokenRecibido);
       this.token.set(tokenRecibido);
+      this.authenticating.set(false);
       return true;
     } catch {
+      this.authenticating.set(false);
       return false;
     }
   }
@@ -88,8 +91,35 @@ export class AuthService {
         console.error('Error decoding token:', error);  // Agrega un registro de consola si hay un error al decodificar el token.
         return null;
     }
-}
+  }
 
+  getRole() {
+    const token = this.getToken();
   
+    if (!token) {
+      console.error('No token found');
+      return null;
+    }
   
+    try {
+      const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        const decodedToken = JSON.parse(jsonPayload);
+  
+      if (decodedToken && decodedToken.subscriptionId) {
+        const role = decodedToken.role;
+        console.log('Subscription ID:', role);
+        return role;
+      } else {
+        console.error('No subscription ID found in token');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
 }

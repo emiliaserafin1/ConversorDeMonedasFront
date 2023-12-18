@@ -12,10 +12,15 @@ export interface User{
     Email: string,
     FirstName: string,
     LastName: string,
-    SubscriptionId: number,
+    subscriptionId: number,
 }
 
 export interface LoginData {
     Email: string,
     Password: string
+}
+
+export interface UserSubscription {
+    Id: number,
+    subscriptionId: number
 }

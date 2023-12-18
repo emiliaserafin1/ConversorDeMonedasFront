@@ -56,16 +56,17 @@ select{
     width: 100%;
     border: none;
     border-radius: 10px;
-}
-    select.p-10 {
+    cursor: pointer;
+    .p-10{
         border: none; 
         outline: none; 
     }
+}
 
 i{
     color: #ffffff;
     margin: auto;
-    padding: 0 30px;
+    padding: 0 20px;
 }
 
 input{
@@ -79,15 +80,24 @@ input{
     font-size: 16px;
 }
 
+input:focus{
+    outline: none;
+}
+
 button{
     width: 100%;
     border: none;
     border-radius: 10px;
-    background-color: #47605F;
+    background-color: variables.$color-principal-300;
     font-weight: 700;
     color: #ffffff;
     cursor: pointer;
     font-size: 16px;
+}
+
+button:hover{
+    background-color: variables.$color-principal-100;
+    transition: 0.1s ease-in-out;
 }
 
 .content-res{
@@ -104,7 +114,7 @@ button{
     }
     .content-res p{
         color: #ffffff;
-        font-weight: 400;
+        font-weight: 500;
         font-size: 26px;
-        letter-spacing: 5px;
     }
+   

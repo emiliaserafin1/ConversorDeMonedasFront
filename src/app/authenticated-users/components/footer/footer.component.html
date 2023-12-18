@@ -1,5 +1,4 @@
-<!-- <footer *ngIf="auth.token()"> -->
-<footer>
+<footer *ngIf="!auth.authenticating() && auth.token()">
     <p>
         2023 - Desarrollo Web - TUP - Proyecto Final - Serafin Emilia
     </p>

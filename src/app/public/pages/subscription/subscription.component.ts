@@ -5,6 +5,8 @@ import { ISubscription } from 'src/app/interfaces/subscription';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { UserSubscription } from 'src/app/interfaces/user';
+import { ConversionService } from 'src/app/services/conversion.service';
 
 @Component({
   selector: 'app-subscription',
@@ -20,7 +22,13 @@ export class SubscriptionComponent implements OnInit {
   subscriptionService = inject(SubscriptionService);
   userService = inject(UserService);
   router = inject(Router);
+  conversionService = inject(ConversionService);
 
+  userId: number | null = 0;
+  user: UserSubscription = {
+    subscriptionId: 0
+  }
+  
   // Suscripción seleccionada
   subscription: ISubscription = {
     id: 0,
@@ -30,14 +38,24 @@ export class SubscriptionComponent implements OnInit {
   };
 
   // Método que se ejecuta al iniciar el componente
-  ngOnInit(): void {
+  async ngOnInit() {
     // Obtener todas las suscripciones disponibles
     this.subscriptionService.getAll().then((res) => {
       this.subscriptions = res;
       console.log(this.subscriptions);
     });
+
+    // Obtener el ID del usuario autenticado
+    this.userId = this.authService.getUserId();
+    console.log('ID DE USUARIO'+this.userId);
+    // Si hay un usuario autenticado, obtener su información de suscripción
+    if (this.userId !== null) {
+      this.user = await this.userService.getUserById(this.userId)
+      console.log('USUARIO SUSCRIPCION ID '+this.user.subscriptionId);
+    }
   }
   
+
 
   async editUserSubscription(subscriptionId: number) {
     // Obtener el ID del usuario autenticado
@@ -63,7 +81,7 @@ export class SubscriptionComponent implements OnInit {
         this.userService.editUserSubscription(userId, subscriptionId).then((res) => {
           if (res) {
             // Redirigir al usuario a la página de inicio de sesión
-            this.router.navigate(['/login']);
+            this.router.navigate(['/conversor']);
           } else {
             // Mostrar un mensaje de error en caso de fallo
             Swal.fire(

@@ -22,7 +22,7 @@
             
             <div class="header-conver">
                 <h2>Conversiones restantes</h2>
-                <p>{{ subscription.id === 9 ? 'Ilimitadas' : remainingConversions }}</p>
+                <p>{{ user.subscriptionId === 9 ? 'Ilimitadas' : (remainingConversions < 0 ? 0 : remainingConversions) }}</p>
             </div>
         </div>
 

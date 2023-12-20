@@ -4,3 +4,4 @@ export interface Currency {
     symbol: string,
     value: number,
 }
+

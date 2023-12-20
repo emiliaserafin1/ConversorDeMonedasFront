@@ -16,7 +16,6 @@ export class AuthService {
   }
   router = inject(Router);
   token: WritableSignal<string | null> = signal(null);
-  authenticating = signal(false);
 
   async login(loginData: LoginData) {
     try {
@@ -28,16 +27,11 @@ export class AuthService {
         body: JSON.stringify(loginData),
       });
       if (!res.ok) return false;
-      this.authenticating.set(true);
       const tokenRecibido = await res.text();
-      console.log('LOGUEANDO', tokenRecibido);
       localStorage.setItem('token', tokenRecibido);
       this.token.set(tokenRecibido);
-      this.authenticating.set(true);
-      this.router.navigate(['/conversor']);
       return true;
     } catch {
-      this.authenticating.set(true);
       return false;
     }
   }
@@ -84,14 +78,13 @@ export class AuthService {
         // Verifica si el token tiene la claim "sub" (ID de usuario) y devuelve su valor como un número
         if (decodedToken && decodedToken.sub) {
             const userId = parseInt(decodedToken.sub as string);
-            console.log('User ID:', userId);  // Agrega un registro de consola para el ID del usuario.
             return userId;
         } else {
-            console.error('No user ID found in token');  // Agrega un registro de consola si no se encuentra el ID del usuario en el token.
+            console.error('No user ID found in token'); 
             return null;
         }
     } catch (error) {
-        console.error('Error decoding token:', error);  // Agrega un registro de consola si hay un error al decodificar el token.
+        console.error('Error decoding token:', error);  
         return null;
     }
   }
@@ -114,8 +107,36 @@ export class AuthService {
   
       if (decodedToken && decodedToken.subscriptionId) {
         const role = decodedToken.role;
-        console.log('Subscription ID:', role);
         return role;
+      } else {
+        console.error('No subscription ID found in token');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+
+  getSubscriptionId() {
+    const token = this.getToken();
+  
+    if (!token) {
+      console.error('No token found');
+      return null;
+    }
+  
+    try {
+      const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        const decodedToken = JSON.parse(jsonPayload);
+  
+      if (decodedToken && decodedToken.subscriptionId) {
+        const subscriptionId = decodedToken.subscriptionId;
+        return subscriptionId;
       } else {
         console.error('No subscription ID found in token');
         return null;

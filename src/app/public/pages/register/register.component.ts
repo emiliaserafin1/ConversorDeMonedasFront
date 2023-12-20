@@ -23,7 +23,7 @@ export class RegisterComponent {
   }
 
   validate(){
-    if (!this.registerData.Username || this.registerData.Username.length < 4) {
+    if (!this.registerData.Username || this.registerData.Username.length <= 3) {
       return false;
     }
     if (!this.registerData.Email || !this.registerData.Email.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)) {
@@ -48,21 +48,21 @@ export class RegisterComponent {
       return;
     }
     // Si todas las validaciones pasan, entonces procede con el registro
-    this.errorRegister.set(true);
+    this.errorRegister.set(false);
     this.cargando.set(true);
     try{
       const res = await this.authService.register(this.registerData);
-      if(res.ok) {
+      if(res) {
         setTimeout(() => {
           this.cargando.set(false);
-          this.router.navigate(["/subscription"]);
+          this.router.navigate(["/login"]);
         }, 1000);
       }
       else {
         setTimeout(() => {
           this.cargando.set(false);
           this.errorRegister.set(true); // Detiene el cargador después de 1 segundo si hay un error
-        }, 2000);
+        }, 1000);
       }
     } catch(err) {
       console.warn('Error registrando', err)

@@ -1,6 +1,3 @@
-<div class="loader-container" *ngIf="cargando()">
-    <span class="loader"></span>
-</div>
 <div class="background">
     <div class="page-container">
         <div class="logo-container">
@@ -11,7 +8,7 @@
                 <img src="./../../../assets/img/logo-verde.png">
                 <p>¡Crea tu cuenta!</p>
                 <div>
-                    <input class="input-style" type="text" id="registerUsername" name="user" placeholder=" " minlength="4" autocomplete="username" required="true" [(ngModel)]="registerData.Username" #user="ngModel" >
+                    <input class="input-style" type="text" id="registerUsername" name="user" placeholder=" " minlength="3" autocomplete="username" required="true" [(ngModel)]="registerData.Username" #user="ngModel" >
                     <label for="registerUsername">Nombre de usuario</label>
                 </div>
                 <div>
@@ -34,7 +31,6 @@
                 <p class="error" *ngIf="user.invalid && (user.touched || user.dirty)">*El nombre de usuario no es válido</p>
                 <p class="error" *ngIf="password.invalid && (password.touched || password.dirty)">*La contraseña no es válida</p> 
                 <button type="submit">Registrate</button>
-                <span class="loader" *ngIf="cargando()"></span>
                 <p *ngIf="errorRegister()" class="error">Error en el registro</p>
                 <span class="loader" *ngIf="cargando()"></span>   
                 <p>¿Ya tienes cuenta? - <a [routerLink]="['/login']">Inicia sesión</a></p>

@@ -9,6 +9,8 @@ import { SubscriptionService } from 'src/app/services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User, UserSubscription } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
+import { generarMensajeError } from 'src/app/helpers/messages';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-conversor',
@@ -38,8 +40,13 @@ export class ConversorComponent {
 
   conversionResult: number = 0;
   
-  user: UserSubscription= {
-    subscriptionId: 0
+  user: User= {
+    id: 0,
+    username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    subscriptionId: 0,
   }
 
   conversion: Conversion = {
@@ -78,22 +85,26 @@ export class ConversorComponent {
 
       // Obtener el ID del usuario autenticado
       this.userId = this.auth.getUserId();
-
+      console.log('ID USUARIO'+this.userId);
       // Si hay un usuario autenticado, obtener su información de suscripción
       if (this.userId !== null) {
         this.user = await this.userService.getUserById(this.userId)
         
         // Si el usuario tiene una suscripción, obtener la cantidad de conversiones disponibles
+        console.log('USUARIO SUSCRIPCION ID '+this.user.subscriptionId);
+        
         if (this.user.subscriptionId !== undefined) {
           this.availableConversions = await this.subscriptionService.getSubscriptionAmountOfConversions(this.user.subscriptionId);
+          console.log('CONVERSIONES DISPONIBLES '+this.availableConversions);
           await this.actualizarConversionesRestantes();
+          console.log('CONVERSIONES RESTANTES '+this.remainingConversions);
         }
       }
       // Asigno las monedas por defecto para que aparezcan en el select
       this.conversion.sourceCurrencyId = this.currencies[0].id;
-      this.conversion.targetCurrencyId = this.currencies[0].id;
+      this.conversion.targetCurrencyId = this.currencies[1].id;
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
@@ -109,10 +120,26 @@ export class ConversorComponent {
     this.user = await this.userService.getUserById(this.userId)
     if (this.user.subscriptionId === undefined) return console.log('Id de suscripción nulo');
     this.availableConversions = await this.subscriptionService.getSubscriptionAmountOfConversions(this.user.subscriptionId);
-
     this.conversion.userId = this.userId;
+
+    // Validaciones
     if (!this.conversion) return console.log(this.conversion)
-    
+    if (isNaN(this.conversion.originalAmount)) {
+      return generarMensajeError('El monto debe ser un número');
+    }
+    if (this.conversion.originalAmount <= 0) {
+      return generarMensajeError('El monto a convertir no puede ser negativo o nulo (cero)');
+    }
+    if (this.conversion.sourceCurrencyId == this.conversion.targetCurrencyId) {
+      return generarMensajeError('Las monedas deben ser diferentes');
+    }
+    if (this.remainingConversions <= 0) {
+      Swal.fire({
+        title: "No tienes conversiones disponibles",
+        icon: "error",
+        footer: '<a href="/subscription">Ir a suscripción</a>'
+    });
+    }
     // Realizar la conversión
     const res = await this.conversionService.convert(this.conversion);
     console.log(res);

@@ -30,12 +30,18 @@ export class LoginComponent {
     this.errorLogin.set(false);
     this.authService.login(this.loginData).then(res => {
       if(res) {
-        setTimeout(() => {
-          this.cargando.set(false); // Detiene el cargador después de 2 segundos
-          this.router.navigate(["/conversor"]);
-        }, 1000);
-      }
-      else {
+        const subsId = this.authService.getSubscriptionId()
+          console.log(subsId);
+          if(subsId == "10") {
+            this.router.navigate(["/subscription"]);
+            this.cargando.set(false); 
+          } else {
+            setTimeout(() => {
+              this.router.navigate(["/conversor"]);
+              this.cargando.set(false); 
+            }, 1000);
+          }
+      } else {
         setTimeout(() => {
           this.cargando.set(false);
           this.errorLogin.set(true); // Detiene el cargador después de 1 segundo si hay un error

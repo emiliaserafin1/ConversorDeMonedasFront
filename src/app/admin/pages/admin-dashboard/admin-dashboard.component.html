@@ -7,7 +7,12 @@
             <div class="tab-money-content">
                 <div class="header-moneda header-table">
                     <h2>Monedas</h2>
-                    <!-- <button (click)="dialogNuevoUsuario.showModal()"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button> -->
+                    <button (click)="dialogCrearMoneda.showModal()"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+                    <dialog method="dialog" #dialogCrearMoneda>
+                            <app-new-currency-modal
+                            (cerrar)="dialogCrearMoneda.close()" (refresh)="fetchCurrencies()">
+                            </app-new-currency-modal>
+                    </dialog>
                 </div>
                 <!-- Tabla -->
                 <table class="table">
@@ -25,8 +30,14 @@
                             <td>{{currency.name}}</td>
                             <td>{{currency.symbol}}</td>
                             <td>{{currency.value}}</td>
-                            <td><button (click)="deleteCurrency(currency.id)"><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button></td>
+                            <td><button (click)="dialogCrearMoneda.showModal()"><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button></td>
                             <td><button (click)="deleteCurrency(currency.id)"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button></td>
+                            <dialog method="dialog" #dialogCrearMoneda>
+                                <app-new-currency-modal
+                                [currency]="currency"
+                                (cerrar)="dialogCrearMoneda.close()" (refresh)="fetchCurrencies()">
+                                </app-new-currency-modal>
+                            </dialog>
                         </tr>
                     </tbody>
                 </table>
@@ -41,12 +52,12 @@
             <div class="tab-money-content">
                 <div class="header-table">
                     <h2>Usuarios</h2>
-                    <button (click)="dialogNuevoUsuario.showModal()"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+                    <button (click)="dialogCrearUsuario.showModal()"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
                 </div>
                 
-                <dialog method="dialog" #dialogNuevoUsuario>
+                <dialog method="dialog" #dialogCrearUsuario>
                     <app-new-user-modal
-                    (cerrar)="dialogNuevoUsuario.close()" (refresh)="fetchUsers()">
+                    (cerrar)="dialogCrearUsuario.close()" (refresh)="fetchUsers()">
                     </app-new-user-modal>
                 </dialog>
                 <!-- Tabla -->
@@ -69,10 +80,10 @@
                             <td>{{user.subscriptionId}}</td>
                             <td><button (click)="dialogEditarUsuario.showModal()"><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button></td>
                             <dialog method="dialog" #dialogEditarUsuario>
-                                <app-new-user-modal
+                                <app-edit-user-modal
                                 [user]="user"
                                 (cerrar)="dialogEditarUsuario.close()" (refresh)="fetchUsers()">
-                                </app-new-user-modal>
+                                </app-edit-user-modal>
                             </dialog>
                             <td><button (click)="deleteUser(user.id)"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button></td>
                         </tr>

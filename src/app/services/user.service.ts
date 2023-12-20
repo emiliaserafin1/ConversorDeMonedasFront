@@ -21,11 +21,11 @@ export class UserService extends ApiService{
   async getUserById(id: number): Promise<User> {
     const res = await fetch(API + 'User/' + id, {
       headers: {
+        'Content-type': 'application/json',
         Authorization: 'Bearer ' + this.auth.token(),
       },
     });
-    const data = await res.json();
-    return data;
+    return await res.json();
   }
 
   async createUser(user: User): Promise<boolean> {

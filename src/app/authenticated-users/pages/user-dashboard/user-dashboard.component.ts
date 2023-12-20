@@ -54,7 +54,6 @@ export class UserDashboardComponent implements OnInit {
 
   async ngOnInit() {
     await this.fetchCurrencies();
-
     // Lista de monedas favoritas
     this.currencyService.getFavoriteCurrencies().then(res => {
       this.favoriteCurrencies.set(res);

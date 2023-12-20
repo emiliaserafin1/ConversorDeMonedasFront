@@ -35,13 +35,30 @@ header {
   }
 }
 
+.icon {
+  display: none;
+}
+
 nav a.active{
   box-shadow: 0 4px 0 0 variables.$color-principal-200;
   line-height: 0.1;
 }
 
-@media (width < 720px){
-  header #logo{
-    height: 40px;
+
+@media (width < 721px) {
+  
+  header img {
+    width: 90px;
+    height: auto;
+    margin: 0 5px;
   }
+  .icon {
+    display: flex;
+    gap: 5px;
+  }
+
+  header nav .text {
+    display: none;
+  }
+
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { usuarioSinLoguear } from './guards/usuario-sin-loguear.guard';
 import { usuarioLogueadoGuard } from './guards/usuario-logueado.guard';
+import { adminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
   },
   {
     path:"subscription",
-    canActivate: [usuarioSinLoguear],
+    canActivate: [usuarioLogueadoGuard],
     loadChildren: ()=> import('./public/pages/subscription/subscription.module').then(m => m.SubscriptionModule)
   },
   {
@@ -36,7 +37,7 @@ const routes: Routes = [
   },
   {
     path:"admin",
-    canActivate: [usuarioLogueadoGuard],
+    canActivate: [adminGuard],
     loadChildren: ()=> import('./admin/pages/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
   },
   {

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, NgModule, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from 'src/app/interfaces/user';
+import { RegisterData, User, UserForCreation } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { generarMensajeError, generarMensajeExito } from 'src/app/helpers/messages';
 import { FormsModule, NgModel } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-new-user-modal',
@@ -14,6 +15,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 })
 export class NewUserModalComponent {
   userService = inject(UserService);
+  auth = inject(AuthService);
 
   @Output() cerrar = new EventEmitter();
   @Output() refresh = new EventEmitter()
@@ -26,27 +28,23 @@ export class NewUserModalComponent {
     subscriptionId: 0
   }
 
-  async onSubmit() {
-    this.user.id ? this.editUser() : this.createUser();
+  userForCreation: RegisterData = {
+    Username: "",
+    Password: "",
+    Email: "",
+    FirstName: "",
+    LastName: "",
   }
 
-  async createUser() {
-    const res = await this.userService.createUser(this.user);
+ 
+  async addUser() {
+    const res = await this.auth.register(this.userForCreation);
     if (res) {
+      console.log(res);
       generarMensajeExito('Usuario creado exitosamente');
       this.refresh.emit();
     } else {
       generarMensajeError('No se ha creado el usuario');
-    }
-  }
-
-  async editUser() {
-    const res = await this.userService.editUser(this.user);
-    if (res) {
-      generarMensajeExito('Usuario editado exitosamente');
-      this.refresh.emit();
-    } else {
-      generarMensajeError('No se ha editado el usuario');
     }
   }
 }

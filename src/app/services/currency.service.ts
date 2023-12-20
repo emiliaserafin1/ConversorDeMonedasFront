@@ -40,10 +40,11 @@ export class CurrencyService {
   }
 
   async createCurrency(currency: Currency) {
-    const res = await fetch(API + 'User', {
+    const res = await fetch(API + 'Currency', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.auth.token(),
       },
       body: JSON.stringify(currency),
     });

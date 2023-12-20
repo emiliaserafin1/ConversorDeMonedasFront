@@ -1,9 +1,12 @@
-<header *ngIf="!auth.authenticating() && auth.token()">
+<header *ngIf="auth.token() && !isLoginPage()">
     <img src="./../../../assets/img/logo-blanco.png" alt="logo-blanco">
     <nav>
-        <a [routerLink]="['/admin']" routerLinkActive="active">Administrar</a>
-        <a [routerLink]="['/conversor']" routerLinkActive="active">Conversor</a>
-        <a [routerLink]="['/perfil']" routerLinkActive="active">Mi cuenta</a>
+        <a class="text admin" *ngIf="isAdmin()" [routerLink]="['/admin']" routerLinkActive="active">Administrar</a>
+        <a class="icon admin" *ngIf="isAdmin()" [routerLink]="['/admin']" routerLinkActive="active"><i class="fa-solid fa-wrench"></i></a>
+        <a class="text"  [routerLink]="['/conversor']" routerLinkActive="active">Conversor</a>
+        <a class="icon" [routerLink]="['/conversor']" routerLinkActive="active"><i class="fa-solid fa-rotate" style="color: #ffffff;"></i></a>
+        <a class="text" [routerLink]="['/perfil']" routerLinkActive="active">Mi cuenta</a>
+        <a  class="icon" [routerLink]="['/conversor']" routerLinkActive="active"><i class="fa-solid fa-user" style="color: #ffffff;"></i></a>
         <button (click)="auth.logOut()"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i></button>
     </nav>
 </header>

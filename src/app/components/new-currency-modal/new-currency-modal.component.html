@@ -1,1 +1,23 @@
-<p>new-currency-modal works!</p>
+<div class="form-container">
+    <form id="edit-currency-form" #form="ngForm" (ngSubmit)="onSubmit()">
+        <h2>{{ currency.id ? "Editar moneda" : "Agregar moneda" }}</h2>
+        <div class="input-container"> 
+            <input class="input-style" type="text" id="currencyName" name="currencyName" placeholder=" " minlength="3" autocomplete="on" required="true" [(ngModel)]="currency.name">
+            <label for="currencyName">Nombre</label>
+        </div>
+        <div class="input-container">
+            <input class="input-style" type="text" id="currencyValue" name="currencyValue" placeholder=" " autocomplete="on" required="true" [(ngModel)]="currency.value" #email="ngModel">
+            <label for="currencyValue">Indice de convertibilidad</label>
+        </div>
+        <div class="input-container">
+            <input class="input-style" type="text" id="currencySymbol" name="currencySymbol" placeholder=" " minlength="3" autocomplete="on" required="true" [(ngModel)]="currency.symbol" #name="ngModel">
+            <label for="currencySymbol">Simbolo</label>
+        </div>
+        
+        <div class="btn-container">
+            <button (click)="this.cerrar.emit()" type="submit">{{ currency.id ? "Editar" : "Crear" }}</button>
+            <button type="button" class="cancel" (click)="this.cerrar.emit()">Cancelar</button>
+        </div>
+    </form>
+</div>
+

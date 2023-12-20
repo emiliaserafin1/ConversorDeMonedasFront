@@ -2,17 +2,17 @@
     <div class="card">
         <h1>Conversor de divisas</h1>
         <p>Ingresa una moneda de entrada, una de salida y ¡coinvert!</p>
-        <p class="mt-10">Conversiones restantes: {{remainingConversions}}</p>
+        <p class="mt-10">{{ user.subscriptionId === 9 ? 'Conversiones Ilimitadas' : 'Conversiones restantes: ' + remainingConversions }}</p>
 
         <!-- Conversion -->
         <div class="mt-20 d-flex">
-            <select class="p-10 " [(ngModel)]="conversion.sourceCurrencyId" >
-                <option value="Moneda de origen" disabled selected>Moneda de origen</option>
-                <option *ngFor="let currency of currencies" [value]="currency.id">{{currency.symbol}}</option>
+            <select class="p-10 " [(ngModel)]="conversion.sourceCurrencyId">
+
+                <option *ngFor="let currency of currencies" [value]="currency.id">{{ favoriteCurrenciesSet.has(currency.id) ? '★ ' + currency.symbol : currency.symbol }}</option>
             </select>
             <i class="fa-solid fa-right-left"></i>
             <select class="p-10 " [(ngModel)]="conversion.targetCurrencyId">
-                <option *ngFor="let currency of currencies" [value]="currency.id">{{currency.symbol}}</option>
+                <option *ngFor="let currency of currencies" [value]="currency.id">{{ favoriteCurrenciesSet.has(currency.id) ? '★ ' + currency.symbol : currency.symbol }}</option>
             </select>
         </div>
 

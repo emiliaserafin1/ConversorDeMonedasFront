@@ -1,0 +1,89 @@
+<div class="page-container">
+    <div class="card">
+        <h1>Administrar</h1>
+
+        <!-- Tabla monedas -->
+        <div class="tab-money-container">
+            <div class="tab-money-content">
+                <div class="header-moneda header-table">
+                    <h2>Monedas</h2>
+                    <!-- <button (click)="dialogNuevoUsuario.showModal()"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button> -->
+                </div>
+                <!-- Tabla -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Símbolo</th>
+                            <th>Índice de convertibilidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let currency of currencies() | paginate: { id:'p1', itemsPerPage: 5, currentPage: p1 }">
+                            <td>{{currency.id}}</td>
+                            <td>{{currency.name}}</td>
+                            <td>{{currency.symbol}}</td>
+                            <td>{{currency.value}}</td>
+                            <td><button (click)="deleteCurrency(currency.id)"><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button></td>
+                            <td><button (click)="deleteCurrency(currency.id)"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="paginate">
+                    <pagination-controls id="p1" (pageChange)="p1 = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla Usuarios -->
+        <div class="tab-hist-container">
+            <div class="tab-money-content">
+                <div class="header-table">
+                    <h2>Usuarios</h2>
+                    <button (click)="dialogNuevoUsuario.showModal()"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+                </div>
+                
+                <dialog method="dialog" #dialogNuevoUsuario>
+                    <app-new-user-modal
+                    (cerrar)="dialogNuevoUsuario.close()" (refresh)="fetchUsers()">
+                    </app-new-user-modal>
+                </dialog>
+                <!-- Tabla -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre y apellido</th>
+                            <th>Email</th>
+                            <th>Nombre de usuario</th>
+                            <th>Id de suscripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users() | paginate: { id:'p2', itemsPerPage: 5, currentPage: p2 }">
+                            <td>{{user.id}}</td>
+                            <td>{{user.firstName}} {{user.lastName}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.subscriptionId}}</td>
+                            <td><button (click)="dialogEditarUsuario.showModal()"><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button></td>
+                            <dialog method="dialog" #dialogEditarUsuario>
+                                <app-new-user-modal
+                                [user]="user"
+                                (cerrar)="dialogEditarUsuario.close()" (refresh)="fetchUsers()">
+                                </app-new-user-modal>
+                            </dialog>
+                            <td><button (click)="deleteUser(user.id)"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="paginate">
+                    <pagination-controls id="p2" (pageChange)="p2 = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

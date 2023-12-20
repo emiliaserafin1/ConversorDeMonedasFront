@@ -1,0 +1,193 @@
+@use "./variables.scss";
+
+.page-container {
+    height: calc(100vh - 105px);
+    gap: 30px;
+    background-color: #F8F9FA;
+}
+
+.card{
+    width: 80%;
+    margin: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+h1{
+    color: variables.$color-principal-200;
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    border-radius: 10px;
+    padding: 20px 0;
+    width: 100%;
+    margin: auto;
+}
+
+.header-sub{
+    background-color: variables.$color-principal-100;
+    text-align: start;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.body-sub {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    i {
+        font-size: 18px;
+    }
+}
+
+#selectSubs {
+    background-color: variables.$color-principal-100;
+    border: none;
+    color: #F8F9FA;
+    font-size: 26px;
+    font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    margin: 0;
+    cursor: pointer;
+}
+
+#selectSubs:disabled {
+    cursor: not-allowed;
+    opacity: 0.90;
+}
+
+.header-conver{
+    background-color: variables.$color-principal-100;
+    text-align: start;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+    .header-sub h2,
+    .header-conver h2,
+    .tab-money-content h2{
+        font-size: 22px;
+        font-weight: 400;
+        margin-bottom: 15px;
+    }
+
+    .header-sub p,
+    .header-conver p{
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+.tab-money-container{
+    background-color: variables.$color-principal-100;
+    border-radius: 10px;
+    padding: 20px 0;
+    width: 100%;
+    margin: auto;
+}
+
+.tab-money-content{
+    color: white;
+    padding: 0 20px;
+}
+
+    .paginate {
+        width: 100%;
+        text-align: end;  
+    }
+
+.header-moneda {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    button {
+        background-color: variables.$color-principal-200;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+    i {
+        text-align: center;
+        font-size: 18px;
+        color: white;
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+  }
+  
+  .table th {
+    text-align: start;
+    color: white; 
+    padding-bottom: 10px; 
+  }
+  
+  .table td {
+    padding: 5px;
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    i {
+        font-size: 14px;
+    }
+  }
+  
+  .table tbody tr:nth-child(odd) {
+    background-color: variables.$color-principal-300; 
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: variables.$color-principal-100; 
+}
+
+.tab-hist-container{
+    background-color: variables.$color-principal-100;
+    border-radius: 10px;
+    padding: 20px 0;
+    width: 100%;
+    margin: auto;
+    margin-top: 25px;
+}
+
+dialog {
+    border: none;
+    padding: 0;
+    border-radius: 15px;
+
+}
+
+::ng-deep {
+    .ngx-pagination .current {
+        padding: 0.1875rem 0.625rem;
+        background: variables.$color-principal-200 !important;
+        color: #fefefe !important;
+        cursor: default;
+    }
+    .ngx-pagination a {
+        color: #fefefe !important;
+        cursor: pointer;
+    }
+}
+

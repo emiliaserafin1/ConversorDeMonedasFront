@@ -16,6 +16,7 @@ const routes: Routes = [
   },
   {
     path:"subscription",
+    canActivate: [usuarioSinLoguear],
     loadChildren: ()=> import('./public/pages/subscription/subscription.module').then(m => m.SubscriptionModule)
   },
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
     path: "",
     redirectTo: 'conversor',
     pathMatch: "full"
+  },
+  {
+    path:"admin",
+    canActivate: [usuarioLogueadoGuard],
+    loadChildren: ()=> import('./admin/pages/admin-dashboard/admin-dashboard.module').then(m => m.AdminDashboardModule)
   },
   {
     path:"**",

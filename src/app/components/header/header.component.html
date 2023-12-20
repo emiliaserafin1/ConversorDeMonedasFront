@@ -1,8 +1,9 @@
 <header *ngIf="!auth.authenticating() && auth.token()">
     <img src="./../../../assets/img/logo-blanco.png" alt="logo-blanco">
     <nav>
-        <a href="">Conversor</a>
-        <a href="">Mi cuenta</a>
+        <a [routerLink]="['/admin']" routerLinkActive="active">Administrar</a>
+        <a [routerLink]="['/conversor']" routerLinkActive="active">Conversor</a>
+        <a [routerLink]="['/perfil']" routerLinkActive="active">Mi cuenta</a>
         <button (click)="auth.logOut()"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i></button>
     </nav>
 </header>

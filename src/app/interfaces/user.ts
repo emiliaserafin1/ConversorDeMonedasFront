@@ -7,11 +7,11 @@ export interface RegisterData {
 }
 
 export interface User{
-    Id: number,
-    Username: string,
-    Email: string,
-    FirstName: string,
-    LastName: string,
+    id: number,
+    username: string,
+    email: string,
+    firstName: string,
+    lastName: string,
     subscriptionId: number,
 }
 
@@ -21,6 +21,5 @@ export interface LoginData {
 }
 
 export interface UserSubscription {
-    Id: number,
     subscriptionId: number
 }

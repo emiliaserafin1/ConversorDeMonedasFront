@@ -6,19 +6,42 @@
         <div class="header-container">
             <div class="header-sub">
                 <h2>Suscripción</h2>
-                <p>FREE</p>
+                <div class="body-sub">
+                    <select id="selectSubs" class="p-10 " [(ngModel)]="subscription.id" [disabled]="!editingMode()">
+                        <option *ngFor="let subscription of subscriptions()" [value]="subscription.id">{{subscription.name}}</option>
+                    </select>
+                    <button id="editBtn" (click)="activateEditMode()" *ngIf="!editingMode()">
+                        <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
+                    </button>
+                    <!-- Botón para confirmar la edición -->
+                    <button *ngIf="editingMode()" (click)="confirmEdit(); editUserSubscription(subscription.id)"><i class="fa-solid fa-check" style="color: #46605f;"></i></button>
+                    <!-- Botón para cancelar la edición -->
+                    <button *ngIf="editingMode()" (click)="cancelEdit()"><i class="fa-solid fa-xmark" style="color: #a91414;"></i></button>
+                </div>
             </div>
+            
             <div class="header-conver">
                 <h2>Conversiones restantes</h2>
-                <p>10</p>
+                <p>{{ subscription.id === 9 ? 'Ilimitadas' : remainingConversions }}</p>
             </div>
         </div>
+
 
         <!-- Tabla monedas -->
         <div class="tab-money-container">
             <div class="tab-money-content">
-                <h2>Monedas favoritas</h2>
-
+                <div class="header-moneda">
+                    <h2>Monedas favoritas</h2>
+                    <button (click)="dialogAgregarMoneda.showModal()"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+                </div>
+                <!-- Modal para agregar monedas favoritas -->
+                <dialog method="dialog" #dialogAgregarMoneda>
+                    <app-favorite-currencies-list
+                    [noFavoriteCurrencies]="noFavoriteCurrencies()"
+                    (cerrar)="dialogAgregarMoneda.close()"
+                    (refresh)="fetchCurrencies()">
+                    </app-favorite-currencies-list>
+                </dialog>
                 <!-- Tabla -->
                 <table class="table">
                     <thead>
@@ -30,30 +53,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr *ngFor="let currency of favoriteCurrencies() | paginate: { id:'p1', itemsPerPage: 3, currentPage: p1 }">
                             <td><i class="fa-solid fa-star"></i></td>
-                            <td>Peso argentino</td>
-                            <td>ARS</td>
-                            <td>0.0002</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-star"></i></td>
-                            <td>Dolar estadounidense</td>
-                            <td>USD</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-star"></i></td>
-                            <td>Euro</td>
-                            <td>EUR</td>
-                            <td>1.2</td>
+                            <td>{{currency.name}}</td>
+                            <td>{{currency.symbol}}</td>
+                            <td>{{currency.value}}</td>
+                            <td><button (click)="deleteFavoriteCurrency(currency.id)"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="paginate">
-                    <p>1 de x <i class="fa-solid fa-arrow-right"></i></p>
+                    <pagination-controls id="p1" (pageChange)="p1 = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
                 </div>
-                
             </div>
         </div>
 
@@ -74,47 +85,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Peso argentino</td>
-                            <td>Dolar estadounidense</td>
-                            <td>10000</td>
-                            <td>1000000000000</td>
-                            <td>5/12/2023</td>
-                        </tr>
-                        <tr>
-                            <td>Dolar estadounidense</td>
-                            <td>Dolar estadounidense</td>
-                            <td>10000</td>
-                            <td>10000</td>
-                            <td>12/11/2023</td>
-                        </tr>
-                        <tr>
-                            <td>Euro</td>
-                            <td>Dolar estadounidense</td>
-                            <td>2000</td>
-                            <td>220000</td>
-                            <td>11/11/2023</td>
-                        </tr>
-                        <tr>
-                            <td>Real</td>
-                            <td>Euro</td>
-                            <td>10000</td>
-                            <td>1000000000000</td>
-                            <td>20/10/2023</td>
-                        </tr>
-                        <tr>
-                            <td>Peso argentino</td>
-                            <td>Dolar estadounidense</td>
-                            <td>50000</td>
-                            <td>5000000000000</td>
-                            <td>5/5/2023</td>
+                        <tr *ngFor="let conversion of conversions() | paginate: { id:'p2', itemsPerPage: 5, currentPage: p2 }">
+                            <td>{{conversion.sourceCurrencyName}}</td>
+                            <td>{{conversion.targetCurrencyName}}</td>
+                            <td>{{conversion.originalAmount}}</td>
+                            <td>{{conversion.convertedAmount}}</td>
+                            <td>{{conversion.date | date:'yyyy-MM-dd'}}</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="paginate">
-                    <p>1 de x <i class="fa-solid fa-arrow-right"></i></p>
+                    <pagination-controls id="p2" (pageChange)="p2 = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
                 </div>
-                
             </div>
         </div>
 

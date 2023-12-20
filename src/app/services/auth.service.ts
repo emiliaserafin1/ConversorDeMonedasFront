@@ -10,12 +10,13 @@ import { API } from '../constants/api';
   providedIn: 'root'
 })
 export class AuthService {
-  authenticating = signal(false);
+  
   constructor() {
     this.token.set(localStorage.getItem('token'));
   }
   router = inject(Router);
   token: WritableSignal<string | null> = signal(null);
+  authenticating = signal(false);
 
   async login(loginData: LoginData) {
     try {
@@ -27,14 +28,16 @@ export class AuthService {
         body: JSON.stringify(loginData),
       });
       if (!res.ok) return false;
+      this.authenticating.set(true);
       const tokenRecibido = await res.text();
       console.log('LOGUEANDO', tokenRecibido);
       localStorage.setItem('token', tokenRecibido);
       this.token.set(tokenRecibido);
-      this.authenticating.set(false);
+      this.authenticating.set(true);
+      this.router.navigate(['/conversor']);
       return true;
     } catch {
-      this.authenticating.set(false);
+      this.authenticating.set(true);
       return false;
     }
   }
@@ -54,7 +57,7 @@ export class AuthService {
   logOut() {
     this.token.set(null);
     localStorage.removeItem('token');
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   getToken() {

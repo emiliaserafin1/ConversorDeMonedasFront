@@ -1,0 +1,100 @@
+@use "./../../../assets/styles/variables.scss";
+
+.page-container {
+    height: 70vh;
+    width: 70vw;
+    background-color: variables.$color-principal-100;
+    padding: none;
+    margin: none;
+    border: none;
+}
+
+
+.tab-money-content h2{
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
+.tab-money-container{
+    background-color: variables.$color-principal-100;
+    border-radius: 10px;
+    padding: 20px 0;
+    width: 100%;
+    margin: auto;
+}
+
+.tab-money-content{
+    color: white;
+    padding: 0 20px;
+}
+
+.header-moneda {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    button {
+        background-color: variables.$color-principal-200;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+    i {
+        text-align: center;
+        font-size: 18px;
+        color: white;
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+  }
+  
+  .table th {
+    text-align: start;
+    color: white; 
+    padding-bottom: 10px; 
+  }
+  
+  .table td {
+    padding: 5px;
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+    i {
+        font-size: 14px;
+    }
+  }
+  
+  .table tbody tr:nth-child(odd) {
+    background-color: variables.$color-principal-300; 
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: variables.$color-principal-100; 
+}
+
+.cancelar-btn {
+    background-color: variables.$color-principal-200;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 25px;
+    margin-left: auto;
+    margin-bottom: 25px;
+    margin-top: auto;
+    display: flex;
+}

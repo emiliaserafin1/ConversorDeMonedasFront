@@ -1,0 +1,31 @@
+<div class="page-container">
+    <!-- Tabla monedas -->
+    <div class="tab-money-container">
+        <div class="tab-money-content">
+            <div class="header-moneda">
+                <h2>Agregar monedas favoritas</h2>
+            </div>
+
+            <!-- Tabla -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Símbolo</th>
+                        <th>Índice de convertibilidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let currency of noFavoriteCurrencies">
+                        <td><button (click)="addFavoriteCurrency(currency.id); refresh.emit()"><i class="fa-regular fa-star" style="color: #ffffff;"></i></button></td>
+                        <td>{{currency.name}}</td>
+                        <td>{{currency.symbol}}</td>
+                        <td>{{currency.value}}</td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="cancelar-btn" type="button" (click)="cerrar.emit()">Cancelar</button>
+    </div>
+</div>

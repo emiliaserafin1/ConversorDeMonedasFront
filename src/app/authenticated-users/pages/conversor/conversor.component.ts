@@ -29,15 +29,16 @@ export class ConversorComponent {
   errorConverting: WritableSignal<boolean> = signal(false)
   cargando: WritableSignal<boolean> = signal(false);
   currencies: Currency[] = [];
-  amountOfConversionsDone: number = 0;
+  favoriteCurrenciesSet: Set<number> = new Set();
   userId: number | null = 0;
-  remainingConversions: number = 0;
+  amountOfConversionsDone: number = 0;
   availableConversions: number | undefined = 0;
+  remainingConversions: number = 0;
+
 
   conversionResult: number = 0;
   
   user: UserSubscription= {
-    Id: 0,
     subscriptionId: 0
   }
 
@@ -45,7 +46,11 @@ export class ConversorComponent {
     userId: 0,
     sourceCurrencyId: 0,
     targetCurrencyId: 0,
-    originalAmount: 0
+    originalAmount: 0,
+    sourceCurrencyName: '',
+    targetCurrencyName: '',
+    convertedAmount: 0,
+    date: new Date()
   }   
 
   // Método que se ejecuta al iniciar el componente
@@ -53,6 +58,23 @@ export class ConversorComponent {
     try {
       // Obtener todas las monedas
       this.currencies = await this.currencyService.getAllCurrencies();
+      const favoriteCurrencies = await this.currencyService.getFavoriteCurrencies();
+      // Crea un nuevo conjunto con las monedas favoritas para facilitar la búsqueda
+      this.favoriteCurrenciesSet = new Set(favoriteCurrencies.map(currency => currency.id));
+
+      // Ordena la lista de todas las monedas de tal manera que las monedas favoritas aparezcan primero
+      this.currencies.sort((a, b) => {
+        const aIsFavorite = this.favoriteCurrenciesSet.has(a.id);
+        const bIsFavorite = this.favoriteCurrenciesSet.has(b.id);
+
+        if (aIsFavorite && !bIsFavorite) {
+          return -1;
+        } else if (!aIsFavorite && bIsFavorite) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
 
       // Obtener el ID del usuario autenticado
       this.userId = this.auth.getUserId();
@@ -67,6 +89,9 @@ export class ConversorComponent {
           await this.actualizarConversionesRestantes();
         }
       }
+      // Asigno las monedas por defecto para que aparezcan en el select
+      this.conversion.sourceCurrencyId = this.currencies[0].id;
+      this.conversion.targetCurrencyId = this.currencies[0].id;
     } catch (error) {
       console.error(error);
     }

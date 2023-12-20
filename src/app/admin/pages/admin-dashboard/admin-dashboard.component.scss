@@ -1,0 +1,25 @@
+@use "./../../../../assets/styles/dashboard.scss";
+@use "./../../../../assets/styles/variables.scss";
+
+.card{
+    width: 90%;
+}
+
+div .header-table {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+
+.header-table {
+    button {
+        background-color: variables.$color-principal-300;   
+        border: none;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+    i {
+        font-size: 18px;
+    }
+}

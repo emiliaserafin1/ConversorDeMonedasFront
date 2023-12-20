@@ -1,0 +1,35 @@
+<div class="form-container">
+    <form id="edit-user-form" #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="on">
+        <h2>{{ user.id ? "Editar usuarip" : "Agregar usuario" }}</h2>
+        <div class="input-container"> 
+            <input class="input-style" type="text" id="editUsername" name="username" placeholder=" " minlength="3" autocomplete="on" required="true" [(ngModel)]="user.username">
+            <label for="editUsername">Nombre de usuario</label>
+        </div>
+        <div class="input-container">
+            <input class="input-style" type="email" id="editEmail" name="email" placeholder=" " autocomplete="on" required="true" [(ngModel)]="user.email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            <label for="editEmail">Email</label>
+        </div>
+        <div class="input-container">
+            <input class="input-style" type="text" id="editName" name="name" placeholder=" " minlength="3" autocomplete="on" required="true" [(ngModel)]="user.firstName" #name="ngModel">
+            <label for="editName">Nombre</label>
+        </div>
+        <div class="input-container">
+            <input class="input-style" type="text" id="editLastname" name="lastname" placeholder=" " minlength="3" autocomplete="on" required="true" [(ngModel)]="user.lastName" #lastname="ngModel">
+            <label for="editLastname">Apellido</label>
+        </div>
+        
+        <div class="radio-input">
+            <span>Suscripción</span>
+            <input type="radio" id="free" name="subscription" value="1"> Free 
+            <input type="radio" id="trial" name="subscription" value="2"> Trial 
+            <input type="radio" id="pro" name="subscription" value="9"> Pro 
+        </div>
+        
+        <div class="btn-container">
+            <button type="submit" (click)="createUser()">Confirmar</button>
+            <button class="cancel" (click)="this.cerrar.emit()">Cancelar</button>
+        </div>
+        
+    </form>
+</div>
+
